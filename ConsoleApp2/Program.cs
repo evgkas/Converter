@@ -2,7 +2,6 @@
 {
     static void Main()
     {
-
         bool endApp = false;
         Converter conveter = new();
         while (!endApp)
@@ -42,7 +41,7 @@
             do
             {
                 int remainder = number % basis;
-                number = number / basis;
+                number /= basis;
                 if (remainder > 9)
                 {
                     remainder = remainder - 10;
