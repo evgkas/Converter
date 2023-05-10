@@ -13,7 +13,7 @@
             int number = 0;
             while (!int.TryParse(numInput1, out number))
             {
-                Console.Write("This is not valid input. Please enter an integer value: ");
+                Console.WriteLine("This is not valid input. Please enter an integer value: ");
                 numInput1 = Console.ReadLine();
             }
 
@@ -23,12 +23,12 @@
             while (!int.TryParse(numInput2, out basis) || Convert.ToInt32(numInput2) < 2
                 || Convert.ToInt32(numInput2) > 20)
             {
-                Console.Write("This is not valid input. Please enter an integer value in range 2 to 20: ");
+                Console.WriteLine("This is not valid input. Please enter an integer value in range 2 to 20: ");
                 numInput2 = Console.ReadLine();
             }
 
-            string InvertedResult = "";    //result of number translation that need to revert
-            string[] SymbolList = new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
+            string invertedResult = "";    //result of number translation that need to revert
+            string[] symbolList = new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
             string result = "";
 
             if (number < 0)
@@ -45,11 +45,11 @@
                 if (remainder > 9)
                 {
                     remainder = remainder - 10;
-                    InvertedResult += SymbolList[remainder];
+                    invertedResult += symbolList[remainder];
                 }
                 else
                 {
-                    InvertedResult += Convert.ToString(remainder);
+                    invertedResult += Convert.ToString(remainder);
                 }
             }
             while (number >= basis);
@@ -59,19 +59,22 @@
                 if (number > 9)
                 {
                     number -= 10;
-                    InvertedResult += SymbolList[number];
+                    invertedResult += symbolList[number];
                 }
-                else InvertedResult += Convert.ToString(number);    //last symbol
+                else invertedResult += Convert.ToString(number);    //last symbol
             }
 
-            for (int i = InvertedResult.Length - 1; i >= 0; i--)
+            for (int i = invertedResult.Length - 1; i >= 0; i--)
             {
-                result += InvertedResult[i];
+                result += invertedResult[i];
             }
 
-            Console.WriteLine("value in " + basis + " basis is " + result);
-            Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
-            if (Console.ReadLine() == "n") endApp = true;
+            Console.WriteLine("value in " + basis + " basis = " + result);
+            Console.WriteLine("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
+            if (Console.ReadLine() == "n")
+            {
+                endApp = true;
+            }
             Console.WriteLine("\n");
 
         }
