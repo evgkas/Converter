@@ -6,42 +6,45 @@
         Converter conveter = new();
         while (!endApp)
         {
-            string numInput1 = "";
-            string numInput2 = "";
+            string numberInput1 = "";
+            string numberInput2 = "";
             Console.WriteLine("Enter number");
-            numInput1 = Console.ReadLine();
-            int number = 0;
-            while (!int.TryParse(numInput1, out number))
+            numberInput1 = Console.ReadLine();
+            int numberToConver = 0;
+
+            while (!int.TryParse(numberInput1, out numberToConver))
             {
                 Console.WriteLine("This is not valid input. Please enter an integer value: ");
-                numInput1 = Console.ReadLine();
+                numberInput1 = Console.ReadLine();
             }
 
             Console.WriteLine("Enter basis of new system from 2 to 20");
-            numInput2 = Console.ReadLine();
-            int basis = 0;
-            while (!int.TryParse(numInput2, out basis) || Convert.ToInt32(numInput2) < 2
-                || Convert.ToInt32(numInput2) > 20)
+            numberInput2 = Console.ReadLine();
+            int newBasis = 0;
+
+            while ((!int.TryParse(numberInput2, out newBasis)) || (Convert.ToInt32(numberInput2) < 2)
+                || (Convert.ToInt32(numberInput2) > 20))
             {
                 Console.WriteLine("This is not valid input. Please enter an integer value in range 2 to 20: ");
-                numInput2 = Console.ReadLine();
+                numberInput2 = Console.ReadLine();
             }
 
             string invertedResult = "";    //result of number translation that need to revert
-            string[] symbolList = new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
+            string[] symbolList = new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };    //for numbers above 9
             string result = "";
 
-            if (number < 0)
+            if (numberToConver < 0)
             {
                 //add "-" to correct work with negative values
                 result += "-";
-                number /= -1;
+                numberToConver /= -1;
             }
 
             do
             {
-                int remainder = number % basis;
-                number /= basis;
+                int remainder = numberToConver % newBasis;
+                numberToConver /= newBasis;
+
                 if (remainder > 9)
                 {
                     remainder = remainder - 10;
@@ -51,19 +54,18 @@
                 {
                     invertedResult += Convert.ToString(remainder);
                 }
-            }
-            while (number >= basis);
+            } while (numberToConver >= newBasis);
 
-            if (number != 0)
+            if (numberToConver != 0)
             {
-                if (number > 9)
+                if (numberToConver > 9)
                 {
-                    number -= 10;
-                    invertedResult += symbolList[number];
+                    numberToConver -= 10;
+                    invertedResult += symbolList[numberToConver];
                 }
                 else
                 {
-                    invertedResult += Convert.ToString(number);    //last symbol
+                    invertedResult += Convert.ToString(numberToConver);    //last symbol
                 }
             }
 
@@ -72,12 +74,14 @@
                 result += invertedResult[i];
             }
 
-            Console.WriteLine("value in " + basis + " basis = " + result);
+            Console.WriteLine("value in " + newBasis + " basis = " + result);
             Console.WriteLine("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
+            
             if (Console.ReadLine() == "n")
             {
                 endApp = true;
             }
+
             Console.WriteLine("\n");
         }
     }
