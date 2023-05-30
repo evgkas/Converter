@@ -1,6 +1,6 @@
 ﻿public class Converter
 {
-    static void Main()
+    public static void Main()
     {
         bool endApp = false;
         Converter conveter = new();
@@ -33,7 +33,7 @@
 
             if (number < 0)
             {
-                //adding a "-" to correct work with negative values
+                //add "-" to correct work with negative values
                 result += "-";
                 number /= -1;
             }
@@ -61,7 +61,10 @@
                     number -= 10;
                     invertedResult += symbolList[number];
                 }
-                else invertedResult += Convert.ToString(number);    //last symbol
+                else
+                {
+                    invertedResult += Convert.ToString(number);    //last symbol
+                }
             }
 
             for (int i = invertedResult.Length - 1; i >= 0; i--)
@@ -76,7 +79,6 @@
                 endApp = true;
             }
             Console.WriteLine("\n");
-
         }
     }
 }
